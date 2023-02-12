@@ -1,0 +1,25 @@
+<article *ngIf="conversionResult">
+  <section class="conversion-result-area justify-content-center mt-4 row">
+      <p class="title--font-size">{{ conversionResult?.query?.amount }} {{ conversionResult?.query?.from }}</p>
+      <p class="title--font-size ml-3 mr-3">=</p>
+      <p class="title--font-size font--roboto-bold accent--color">{{ conversionResult?.result | number:'1.3-3'}} {{ conversionResult?.query?.to }}</p>
+  </section>
+
+  <section class="conversion-info-area justify-content-center row">
+    <div>
+      <p class="body-text--font-size no--margin">
+          1 {{ conversionResult?.query?.from }}
+          =
+          {{ conversionResult?.info?.rate | number:'1.5-5'}} {{ conversionResult?.query?.to }}
+      </p>
+      <p class="w-100 no--margin"></p>
+      <p class="body-text--font-size no--margin">
+        1 {{ conversionResult?.query?.to }}
+        =
+        {{ 1/conversionResult?.info?.rate | number:'1.5-5'}} {{ conversionResult?.query?.from }}
+    </p>
+  </div>
+
+  </section>
+</article>
+

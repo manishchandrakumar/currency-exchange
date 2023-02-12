@@ -1,0 +1,30 @@
+.title {
+  margin-bottom: 4.5rem;
+}
+
+.mat-column-actions {
+  padding-left: 7rem;
+}
+
+.history-table {
+  overflow-y: auto;
+
+  .mat-column-actions {
+    min-width: 23rem;
+    max-width: 23rem;
+
+    button {
+      display: none;
+    }
+  }
+
+  tr:hover {
+    .mat-column-actions {
+      button {
+        display: inherit;
+        border: none;
+        background: transparent;
+      }
+    }
+  }
+}

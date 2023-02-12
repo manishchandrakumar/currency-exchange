@@ -1,0 +1,46 @@
+<form class="conversion-area"
+  (keyup.enter)="$event.preventDefault()"
+  [formGroup]="currencyConversionForm"
+  (submit)="handleSubmit()" novalidate>
+
+  <mat-form-field class="margin-sm-right col-12 col-md-12 col-lg-3 col-xl-3">
+    <input matInput placeholder="Amount" formControlName="amount" type="number">
+  </mat-form-field>
+
+
+  <mat-form-field class="margin-sm-left-right col-12 col-md-12 col-lg-3 col-xl-3">
+    <input type="text" placeholder="From" aria-label="From" class="pb-0 from-control" matInput
+    formControlName="from" [matAutocomplete]="auto">
+
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option *ngFor="let currency of filteredFromCurrencies | async" [value]="currency">
+        {{currency}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <button mat-raised-button type="button" (click)="swapCurrency()"
+    class="icon-compare-arrows cursor--pointer primary--color margin-sm-left-right opposite-arrows"></button>
+
+  <mat-form-field class="margin-sm-left col-12 col-md-12 col-lg-3 col-xl-3">
+    <input type="text" placeholder="To" aria-label="To" class="pb-0 to-control" matInput formControlName="to"
+      [matAutocomplete]="toCurrencyAuto">
+
+    <mat-autocomplete #toCurrencyAuto="matAutocomplete">
+      <mat-option *ngFor="let currency of filteredToCurrencies | async" [value]="currency">
+        {{currency}}
+      </mat-option>
+    </mat-autocomplete>
+
+  </mat-form-field>
+
+
+
+  <button
+    mat-raised-button
+    class="margin-sm-left convert-button"
+    [disabled]="!currencyConversionForm.valid"
+    color="primary" type="submit">
+      CONVERT
+  </button>
+</form>

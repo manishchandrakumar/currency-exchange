@@ -1,0 +1,257 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+
+// Defining custom palettes for Accent and Warn color as green and red color.
+// Custom Palettes are generated using http://mcg.mbitson.com/
+
+$green-palette: (
+  50: #f2f8e4,
+  100: #dfeebc,
+  200: #cae390,
+  300: #b4d863,
+  400: #a4cf41,
+  500: #94c720,
+  600: #8cc11c,
+  700: #81ba18,
+  800: #77b313,
+  900: #65a60b,
+  A100: #ebffd4,
+  A200: #d3ffa1,
+  A400: #bcff6e,
+  A700: #b0ff54,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$red-palette: (
+  50: #f8e2e7,
+  100: #eeb6c3,
+  200: #e3869c,
+  300: #d85674,
+  400: #cf3156,
+  500: #c70d38,
+  600: #c10b32,
+  700: #ba092b,
+  800: #b30724,
+  900: #a60317,
+  A100: #ffd0d4,
+  A200: #ff9da5,
+  A400: #ff6a76,
+  A700: #ff515e,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$currency-converter-primary: mat.define-palette(mat.$teal-palette);
+
+$currency-converter-accent: mat.define-palette(
+  $green-palette,
+  A200,
+  A100,
+  A400
+);
+
+$currency-converter-warn: mat.define-palette($red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$currency-converter-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $currency-converter-primary,
+      accent: $currency-converter-accent,
+      warn: $currency-converter-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($currency-converter-theme);
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f7f7f7;
+  color: #404040;
+}
+
+.no--padding {
+  padding: 0 !important;
+}
+
+.no--margin {
+  margin: 0 !important;
+}
+
+.cursor--pointer {
+  cursor: pointer;
+}
+
+.font--roboto {
+  font-family: "Roboto", Helvetica, Arial, serif;
+}
+
+.font--roboto-bold {
+  font-family: "Roboto - Bold", Helvetica, Arial, serif;
+}
+
+.primary--color {
+  color: #009688;
+}
+
+.primary--background-color {
+  background-color: #009688;
+}
+
+.accent--color {
+  color: #94c720;
+}
+
+.accent--background-color {
+  background-color: #94c720;
+}
+
+.warn--color {
+  color: #c70d38;
+}
+
+.warn--background-color {
+  background-color: #c70d38;
+}
+
+.default--text-color {
+  color: #404040;
+}
+
+.table-header--text-color {
+  color: #8d8d8d;
+}
+
+.title--font-size {
+  font-size: 48px;
+}
+
+.section-title--font-size {
+  font-size: 24px;
+}
+
+.symbol--font-size {
+  font-size: 20px;
+}
+
+.body-text--font-size {
+  font-size: 16px;
+}
+
+.margin-lg-left {
+  margin-left: 1.5rem;
+}
+
+.margin-sm-left-right {
+  margin: 0 10px !important;
+}
+
+.margin-sm-left {
+  margin-left: 10px !important;
+}
+
+.margin-sm-right {
+  margin-right: 10px !important;
+}
+
+.color--matte-red {
+  color: #8b4242;
+}
+
+.mh-100px {
+  min-height: 100px;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 1px 1px #333 !important;
+}
+
+app-converter,
+app-history {
+  margin-bottom: auto;
+}
+
+app-language-buttons {
+  margin-top: auto;
+}
+
+.mat-mini-fab {
+  line-height: 1 !important;
+  width: 30px !important;
+  height: 30px !important;
+
+  .mat-button-wrapper {
+    line-height: 1 !important;
+    font-size: 12px !important;
+  }
+}
+.history-table {
+  table {
+    thead {
+      tr {
+        th {
+          padding-right: 2rem;
+        }
+      }
+    }
+    tbody {
+      tr {
+        td {
+          padding-right: 2rem;
+        }
+      }
+    }
+  }
+}

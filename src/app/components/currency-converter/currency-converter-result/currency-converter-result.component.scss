@@ -1,0 +1,12 @@
+.conversion-info-area {
+  p {
+    text-align: left;
+  }
+}
+
+.row {
+  > * {
+    width: auto;
+    max-width: auto;
+  }
+}
