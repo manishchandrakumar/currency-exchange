@@ -11,7 +11,7 @@ import { StorageService } from 'src/app/core/services/storage/storage.service';
 })
 export class ConversionHistoryComponent {
 
-  displayedConversionHistoryColumns = ['date', 'event', 'actions'];
+  conversionHistoryColumns = ExchangeConstants.ConversionHistoryColumns;
   conversionHistoryData: ConversionHistory[];
 
   constructor(
@@ -24,21 +24,18 @@ export class ConversionHistoryComponent {
     return history && history.reverse();
   }
 
-  onViewConversionHistory(history: ConversionHistory): void {
-    this.router.navigate(['convert'], {
-      queryParams: {
-        amount: history.amount,
-        from: history.fromCurrency,
-        to: history.toCurrency
-      }
-    });
+  viewConversionHistory(history: ConversionHistory): void {
+    const { amount, fromCurrency: from, toCurrency: to} = history;
+    const queryParams = { amount, from , to};
+
+    this.router.navigate(['convert'], { queryParams });
   }
 
-  onDeleteConversionHistory(id: number): void {
+  deleteConversionHistory(id: number): void {
     const history = this.conversionHistory;
 
     if (history?.length) {
-      const filteredHistory = history.filter(h => h.id !== id);
+      const filteredHistory = history.filter(history => history.id !== id);
       this.storageService.setStorage(ExchangeConstants.HisoryStorageKey, filteredHistory);
     }
   }

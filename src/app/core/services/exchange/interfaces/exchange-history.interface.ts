@@ -17,7 +17,8 @@ export interface ExchangeRateStatistics {
 export interface ExchangeHistoryRequest {
   startDate: string;
   endDate: string;
-  baseCurrency?: string;
+  from?: string;
+  to?: string;
 }
 
 export interface CalculatedRates {

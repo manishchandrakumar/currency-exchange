@@ -41,9 +41,8 @@ export class CurrencyConverterComponent implements OnInit {
   }
 
   handleConvertCurrency(conversionRequest: ConversionInputInterface): void {
-    const { amount, from, to } = conversionRequest;
-    this.baseCurrency = from;
-    this.conversionResult = this.exchangeService.convertCurrency(amount, from, to);
+    this.conversionRequest = conversionRequest;
+    this.conversionResult = this.exchangeService.convertCurrency(conversionRequest);
     this.saveConversionHistory(this.getConversionHistory(conversionRequest));
   }
 
@@ -82,7 +81,6 @@ export class CurrencyConverterComponent implements OnInit {
       this.handleConvertCurrency(queryParam);
     });
   }
-
 
 }
 

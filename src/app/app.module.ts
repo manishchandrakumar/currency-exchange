@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConversionHistoryComponent } from './components/conversion-history/conversion-history.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
@@ -8,7 +8,6 @@ import { CurrencyConverterComponent } from './components/currency-converter/curr
 import { CurrencyConverterModule } from './components/currency-converter/currency-converter.module';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
 
 export const routes: Routes = [
   {
@@ -24,21 +23,21 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        ConversionHistoryComponent,
-        CurrencyConverterComponent
-    ],
-    providers: [],
-    bootstrap: [AppComponent],
-    imports: [
-        CommonModule,
-        SharedModule,
-        CurrencyConverterModule,
-        BrowserAnimationsModule,
-        MatTableModule,
-        RouterModule.forRoot(routes),
-        CurrencyConverterModule
-    ]
+  declarations: [
+    AppComponent,
+    ConversionHistoryComponent,
+    CurrencyConverterComponent
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
+  imports: [
+    CommonModule,
+    SharedModule,
+    CurrencyConverterModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    RouterModule.forRoot(routes),
+    CurrencyConverterModule
+  ]
 })
 export class AppModule { }

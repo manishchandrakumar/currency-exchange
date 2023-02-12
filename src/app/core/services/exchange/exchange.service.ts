@@ -7,6 +7,8 @@ import { ExchangeHistoryMapperService } from './mappers/exchange-history.mapper.
 import { ExchangeHistory, ExchangeHistoryRequest } from './interfaces/exchange-history.interface';
 import { Symbols } from './interfaces/symbol.interface';
 import { Observable } from 'rxjs';
+import { ExchangeApiEndpoints } from './enums/exchange-endpoints.enum';
+import { ConversionInputInterface } from './interfaces/conversion-input.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,7 @@ export class ExchangeService {
   ) {}
 
   getSymbols(): Observable<string[]> {
-    const url = this.generateUrl('symbols');
+    const url = this.getUrlWithQueryParam(ExchangeApiEndpoints.SYMBOLS);
 
     return this.http.get<Symbols>(url)
       .pipe(
@@ -26,33 +28,29 @@ export class ExchangeService {
       );
   }
 
-  convertCurrency(amount: number, from: string, to: string): Observable<CurrencyConversionResponse> {
-    const url = this.generateUrl('convert', {from, to, amount});
+  convertCurrency(request: ConversionInputInterface): Observable<CurrencyConversionResponse> {
+    const url = this.getUrlWithQueryParam(ExchangeApiEndpoints.CONVERT, {...request});
     return this.http.get<CurrencyConversionResponse>(url);
   }
 
   getExchangeHistory(request: ExchangeHistoryRequest): Observable<ExchangeHistory> {
-    const queryParams = { start_date: request.startDate, end_date:request.endDate};
-    const url = this.generateUrl('timeseries', queryParams);
+    const queryParams = { start_date: request.startDate, end_date:request.endDate, base: request.from};
+    const url = this.getUrlWithQueryParam(ExchangeApiEndpoints.TIMESERIES, queryParams);
 
     return this.http.get<{ rates: object }>(url)
       .pipe(
-        map(response => this.exchangeHistoryMapper.toModel(response, request.baseCurrency))
+        map(response => this.exchangeHistoryMapper.toModel(response, request.to))
       );
   }
 
-  private generateUrl(path: string, queryParams?: object): string {
-    let url = `${ExchangeConstants.exchangeUrl}/${path}`;
+  private getUrlWithQueryParam(path: string, queryParams?: object): string {
+    const queryString = queryParams ?
+        Object.keys(queryParams)
+            .map(key => `${key}=${queryParams[key]}`)
+            .join('&')
+        : '';
 
-    if (queryParams) {
-      const queryString = Object.entries(queryParams)
-        .map(([key, value]) => `${key}=${value}`)
-        .join('&');
-
-      url = `${url}?${queryString}`;
-    }
-
-    return url;
+    return `${ExchangeConstants.exchangeUrl}/${path}${queryString ? `?${queryString}` : ''}`;
   }
 
 }

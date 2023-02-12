@@ -10,24 +10,7 @@ describe('ConversionHistoryComponent', () => {
   let storageServiceSpy;
   let router: Router;
 
-  const conversionHistory: ConversionHistory[] = [
-    {
-      id: 1,
-      conversionDate: '2023-02-11',
-      conversionTime: '4:00',
-      amount: 1,
-      fromCurrency: 'USD',
-      toCurrency: 'EUR',
-    },
-    {
-      id: 2,
-      conversionDate: '2023-02-11',
-      conversionTime: '4:15',
-      amount: 2,
-      fromCurrency: 'USD',
-      toCurrency: 'EUR',
-    }
-  ];
+  const conversionHistory = getMockCOnversionHistory();
 
   beforeEach(() => {
     storageServiceSpy = jasmine.createSpyObj('StorageService', ['getStorage', 'setStorage']);
@@ -61,7 +44,7 @@ describe('ConversionHistoryComponent', () => {
 
   describe('onViewConversionHistory', () => {
     it('should navigate to conversion page on view history', () => {
-      component.onViewConversionHistory(conversionHistory[0]);
+      component.viewConversionHistory(conversionHistory[0]);
 
       expect(router.navigate).toHaveBeenCalledWith(['convert'], {
         queryParams: {
@@ -77,10 +60,31 @@ describe('ConversionHistoryComponent', () => {
     it('should delete conversion history from storage', () => {
       storageServiceSpy.getStorage.and.returnValue(conversionHistory);
 
-      component.onDeleteConversionHistory(0);
+      component.deleteConversionHistory(0);
 
       expect(storageServiceSpy.setStorage).toHaveBeenCalled();
     });
   });
+
+  function getMockCOnversionHistory() {
+    return [
+      {
+        id: 1,
+        conversionDate: '2023-02-11',
+        conversionTime: '4:00',
+        amount: 1,
+        fromCurrency: 'USD',
+        toCurrency: 'EUR',
+      },
+      {
+        id: 2,
+        conversionDate: '2023-02-11',
+        conversionTime: '4:15',
+        amount: 2,
+        fromCurrency: 'USD',
+        toCurrency: 'EUR',
+      }
+    ];
+  }
 
 });

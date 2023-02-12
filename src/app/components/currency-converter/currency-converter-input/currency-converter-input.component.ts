@@ -3,7 +3,6 @@ import { map, Observable, startWith } from 'rxjs';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ConversionInputInterface } from 'src/app/core/services/exchange/interfaces/conversion-input.interface';
 
-
 @Component({
   selector: 'app-currency-converter-input',
   templateUrl: './currency-converter-input.component.html',
@@ -19,8 +18,7 @@ export class CurrencyConverterInputComponent implements OnInit, OnChanges {
   filteredToCurrencies: Observable<string[]>;
   currencyConversionForm: FormGroup;
 
-
-  ngOnInit() {
+  ngOnInit(): void {
     this.initForm();
   }
 
@@ -34,14 +32,14 @@ export class CurrencyConverterInputComponent implements OnInit, OnChanges {
     this.conversionInput.emit(this.currencyConversionForm?.value);
   }
 
-  swapCurrency() {
+  swapCurrency(): void {
     this.currencyConversionForm.patchValue({
       from: this.currencyConversionForm.get('to').value,
       to: this.currencyConversionForm.get('from').value
     })
   }
 
-  private initForm() {
+  private initForm(): void {
     this.currencyConversionForm = new FormGroup({
       amount: new FormControl('', Validators.required),
       from: new FormControl('', Validators.required),
@@ -50,7 +48,7 @@ export class CurrencyConverterInputComponent implements OnInit, OnChanges {
   }
 
   private autoPopulateCurrencies(): void {
-    if(!this.currencyConversionForm?.controls) return;
+    if(!this.currencyConversionForm?.controls) { return; }
     const {to, from} = this.currencyConversionForm?.controls;
     this.filteredFromCurrencies = this.filterCurrencyInput(from);
     this.filteredToCurrencies = this.filterCurrencyInput(to);

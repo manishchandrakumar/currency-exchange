@@ -8,21 +8,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ExchangeHistoryComponent } from './exchange-history/exchange-history.component';
 import { RouterModule, Routes } from '@angular/router';
 import { CurrencyConverterComponent } from './currency-converter.component';
-import { BrowserModule } from '@angular/platform-browser';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'convert',
     component: CurrencyConverterComponent
   }
 ];
-
 
 @NgModule({
   declarations: [

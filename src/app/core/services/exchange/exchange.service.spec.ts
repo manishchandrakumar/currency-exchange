@@ -5,6 +5,7 @@ import { ExchangeConstants } from './constants/exchange.constants';
 import { ExchangeHistory, ExchangeHistoryRequest, ExchangeRates, ExchangeRateStatistics } from './interfaces/exchange-history.interface';
 import { CurrencyConversionResponse } from './interfaces/currency-conversion.response';
 import { ExchangeHistoryMapperService } from './mappers/exchange-history.mapper.service';
+import { ConversionInputInterface } from './interfaces/conversion-input.interface';
 
 describe('ExchangeService', () => {
   let service: ExchangeService;
@@ -45,20 +46,22 @@ describe('ExchangeService', () => {
   describe('convertCurrency', () => {
 
     it('should convert currency', () => {
-      const amount = 100;
-      const from = 'EUR';
-      const to = 'INR';
+      const conversionRequest: ConversionInputInterface = {
+        amount: 100,
+        from: 'EUR',
+        to: 'INR'
+      };
       const mockConversionResponse = {
         success: true,
         result: 80
       } as CurrencyConversionResponse;
 
-      service.convertCurrency(amount, from, to).subscribe(conversionResponse => {
+      service.convertCurrency(conversionRequest).subscribe(conversionResponse => {
         expect(conversionResponse.success).toBe(true);
         expect(conversionResponse.result).toBe(80);
       });
 
-      const req = httpMock.expectOne(`${ExchangeConstants.exchangeUrl}/convert?from=${from}&to=${to}&amount=${amount}`);
+      const req = httpMock.expectOne(`${ExchangeConstants.exchangeUrl}/convert?amount=100&from=EUR&to=INR`);
       expect(req.request.method).toBe('GET');
       req.flush(mockConversionResponse);
     });
@@ -70,7 +73,8 @@ describe('ExchangeService', () => {
       const exchangeHisoryRequest = {
         startDate: '2023-02-10',
         endDate: '2023-02-17',
-        baseCurrency: 'EUR'
+        from: 'EUR',
+        to: 'INR'
       } as ExchangeHistoryRequest
 
       const history: ExchangeRates[] = [
@@ -85,7 +89,7 @@ describe('ExchangeService', () => {
       };
 
       const exchangeDataMock = { history, statistics } as ExchangeHistory;
-      const queryParam = `start_date=${exchangeHisoryRequest.startDate}&end_date=${exchangeHisoryRequest.endDate}`;
+      const queryParam = `start_date=2023-02-10&end_date=2023-02-17&base=EUR`;
 
       mockExchangeHistoryMapper.toModel.and.returnValue(exchangeDataMock);
 

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CurrencyConversionResponse } from "../../../core/services/exchange/interfaces/currency-conversion.response";
+import { CurrencyConversionResponse } from '../../../core/services/exchange/interfaces/currency-conversion.response';
 
 @Component({
   selector: 'app-currency-converter-result',

@@ -1,5 +1,5 @@
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { ActivatedRoute, convertToParamMap, Router, RouterModule } from '@angular/router';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ActivatedRoute, convertToParamMap} from '@angular/router';
 import { of } from 'rxjs';
 import { CurrencyConverterComponent } from './currency-converter.component';
 import { ExchangeService } from 'src/app/core/services/exchange/exchange.service';
@@ -7,7 +7,7 @@ import { ConversionInputInterface } from 'src/app/core/services/exchange/interfa
 import { CurrencyConversionResponse } from 'src/app/core/services/exchange/interfaces/currency-conversion.response';
 import { ExchangeHistoryRequest } from 'src/app/core/services/exchange/interfaces/exchange-history.interface';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('CurrencyConverterComponent', () => {
@@ -74,7 +74,7 @@ describe('CurrencyConverterComponent', () => {
       const exchangeHistoryRequest = {
         startDate: '2023-02-10',
         endDate: '2023-02-10',
-        baseCurrency: 'EUR'
+        from: 'EUR'
       } as ExchangeHistoryRequest;
 
       component.getExchangeHistory(exchangeHistoryRequest);
@@ -98,8 +98,8 @@ describe('CurrencyConverterComponent', () => {
       exchangeServiceSpy.convertCurrency.and.returnValue(of(conversionResult));
       component.handleConvertCurrency(conversionRequest);
 
-      expect(exchangeServiceSpy.convertCurrency).toHaveBeenCalledWith(100, 'EUR', 'INR');
-      expect(component.baseCurrency).toBe('EUR');
+      expect(exchangeServiceSpy.convertCurrency).toHaveBeenCalledWith(conversionRequest);
+      expect(component.conversionRequest).toEqual(conversionRequest);
       expect(storageServiceSpy.setStorage).toHaveBeenCalled();
     });
 

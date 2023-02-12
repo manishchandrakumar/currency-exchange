@@ -7,11 +7,11 @@ import { CalculatedRates, ExchangeHistory, ExchangeRates, ExchangeRateStatistics
 export class ExchangeHistoryMapperService {
 
   exchangeRates: object;
-  baseCurrency: string;
+  toCurrency: string;
 
-  toModel(response: {rates: object}, baseCurrency: string): ExchangeHistory {
+  toModel(response: {rates: object}, toCurrency: string): ExchangeHistory {
     this.exchangeRates = response.rates;
-    this.baseCurrency = baseCurrency;
+    this.toCurrency = toCurrency;
 
     return {
       history: this.history,
@@ -29,7 +29,7 @@ export class ExchangeHistoryMapperService {
 
   private get history(): ExchangeRates[] {
     return Object.entries(this.exchangeRates)
-      .map(([date, exchangeRate]) => ({ date, rate: exchangeRate[this.baseCurrency] }))
+      .map(([date, exchangeRate]) => ({ date, rate: exchangeRate[this.toCurrency] }))
       .reverse();
   }
 

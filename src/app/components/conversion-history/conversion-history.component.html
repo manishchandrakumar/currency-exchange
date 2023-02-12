@@ -29,19 +29,19 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let history">
-          <button mat-button (click)="onViewConversionHistory(history)" class="icon-red-eye primary--color">
+          <button mat-button (click)="viewConversionHistory(history)" class="icon-red-eye primary--color">
             View
           </button>
 
-          <button mat-button (click)="onDeleteConversionHistory(history.id)"
+          <button mat-button (click)="deleteConversionHistory(history.id)"
             class="icon-delete-forever warn--color ml-2">
             Delete from history
           </button>
         </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedConversionHistoryColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedConversionHistoryColumns;"></tr>
+      <tr mat-header-row *matHeaderRowDef="conversionHistoryColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: conversionHistoryColumns;"></tr>
     </table>
     <ng-template #noHistoricalData>
       <p class="no--margin color--matte-red">
