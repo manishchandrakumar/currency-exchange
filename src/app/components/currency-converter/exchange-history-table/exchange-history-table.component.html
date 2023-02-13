@@ -1,0 +1,49 @@
+<section class="history-table col-12 mb-4 pl-3 pr-3" *ngIf="exchangeHistory?.history.length; else noData">
+    <div class="row flex-xl-row flex-lg-row flex-md-row flex-sm-column no--padding m-0 mb-4">
+        <div
+                class="col-12 col-md-6 col-lg-6 col-xl-6 p-0 pr-lg-2 pr-md-2 pr-xl-2 mt-xl-0 mt-lg-0 mt-md-0 mt-4 order-1 order-md-0">
+            <table mat-table [dataSource]="exchangeHistory?.history" class="w-100">
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef>Date </th>
+                    <td mat-cell *matCellDef="let history">{{history.date | date:"dd/MM/yyyy"}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="exchangeRate">
+                    <th mat-header-cell *matHeaderCellDef> Exchange Rate </th>
+                    <td mat-cell *matCellDef="let history"> {{history.rate | number:'1.7-7'}} </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="exchangeHistoryColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: exchangeHistoryColumns;"></tr>
+            </table>
+
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-6 col-xl-6 p-0 pl-lg-2 pl-md-2 pl-xl-2 order-0 order-md-1">
+            <table mat-table [dataSource]="exchangeHistory.statistics | keyvalue" class="w-100 margin-lg-left">
+                <ng-container matColumnDef="statistics">
+                    <th mat-header-cell *matHeaderCellDef>Statistics</th>
+                    <td mat-cell *matCellDef="let statistics">{{statistics.key | titlecase}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="value">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let statistics">{{statistics.value | number:'1.7-7'}} </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="exchangeStatisticsColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: exchangeStatisticsColumns;"></tr>
+            </table>
+        </div>
+    </div>
+</section>
+
+<ng-template #noData>
+    <div class="col-12">
+        <p class="color--matte-red">
+            No Data
+        </p>
+    </div>
+</ng-template>

@@ -17,6 +17,6 @@
 <app-exchange-history
     *ngIf="conversionResult | async"
     [conversionRequest] = "conversionRequest"
-    (exchangeHisoryRequest)="getExchangeHistory($event)"
+    (exchangeHistoryRequest)="getExchangeHistory($event)"
     [exchangeHistory]="exchangeHistory | async">
 </app-exchange-history>

@@ -255,3 +255,18 @@ app-language-buttons {
     }
   }
 }
+
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #009688;
+}
+
+
+.mat-radio-checked .mat-radio-inner-circle {
+  background-color: #009688!important;
+}
+
+.anychart-credits {
+  display: none;
+}
+

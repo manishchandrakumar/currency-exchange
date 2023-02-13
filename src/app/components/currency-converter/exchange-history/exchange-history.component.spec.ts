@@ -42,10 +42,10 @@ describe('ExchangeHistoryComponent', () => {
 
       component.conversionRequest = conversionRequest;
 
-      spyOn(component.exchangeHisoryRequest, 'emit');
+      spyOn(component.exchangeHistoryRequest, 'emit');
       component.selectDuration();
 
-      expect(component.exchangeHisoryRequest.emit).toHaveBeenCalledWith(jasmine.objectContaining({
+      expect(component.exchangeHistoryRequest.emit).toHaveBeenCalledWith(jasmine.objectContaining({
         from: 'EUR',
         to: 'INR'
       }));

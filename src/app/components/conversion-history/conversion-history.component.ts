@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ExchangeConstants } from 'src/app/core/services/exchange/constants/exchange.constants';
 import { ConversionHistory } from 'src/app/core/services/exchange/interfaces/conversion-input.interface';
@@ -7,7 +7,8 @@ import { StorageService } from 'src/app/core/services/storage/storage.service';
 @Component({
   selector: 'app-conversion-history',
   templateUrl: './conversion-history.component.html',
-  styleUrls: ['./conversion-history.component.scss']
+  styleUrls: ['./conversion-history.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConversionHistoryComponent {
 
@@ -20,7 +21,7 @@ export class ConversionHistoryComponent {
   ) { }
 
   get conversionHistory(): ConversionHistory[] {
-    const history = this.storageService.getStorage(ExchangeConstants.HisoryStorageKey) as ConversionHistory[];
+    const history = this.storageService.getStorage(ExchangeConstants.HistoryStorageKey) as ConversionHistory[];
     return history && history.reverse();
   }
 
@@ -36,7 +37,7 @@ export class ConversionHistoryComponent {
 
     if (history?.length) {
       const filteredHistory = history.filter(history => history.id !== id);
-      this.storageService.setStorage(ExchangeConstants.HisoryStorageKey, filteredHistory);
+      this.storageService.setStorage(ExchangeConstants.HistoryStorageKey, filteredHistory);
     }
   }
 

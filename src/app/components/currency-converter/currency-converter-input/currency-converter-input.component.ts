@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import { map, Observable, startWith } from 'rxjs';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ConversionInputInterface } from 'src/app/core/services/exchange/interfaces/conversion-input.interface';
@@ -6,7 +15,8 @@ import { ConversionInputInterface } from 'src/app/core/services/exchange/interfa
 @Component({
   selector: 'app-currency-converter-input',
   templateUrl: './currency-converter-input.component.html',
-  styleUrls: ['./currency-converter-input.component.scss']
+  styleUrls: ['./currency-converter-input.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CurrencyConverterInputComponent implements OnInit, OnChanges {
 

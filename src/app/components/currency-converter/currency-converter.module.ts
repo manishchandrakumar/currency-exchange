@@ -8,11 +8,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ExchangeHistoryComponent } from './exchange-history/exchange-history.component';
 import { RouterModule, Routes } from '@angular/router';
 import { CurrencyConverterComponent } from './currency-converter.component';
+import { ExchangeHistoryChartComponent } from './exchange-history-chart/exchange-history-chart.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { ExchangeHistoryTableComponent } from './exchange-history-table/exchange-history-table.component';
 
 const routes: Routes = [
   {
@@ -25,27 +28,32 @@ const routes: Routes = [
   declarations: [
     CurrencyConverterInputComponent,
     CurrencyConverterResultComponent,
-    ExchangeHistoryComponent
-  ],
-  exports: [
-    CurrencyConverterInputComponent,
-    CurrencyConverterResultComponent,
     ExchangeHistoryComponent,
-    RouterModule
+    ExchangeHistoryChartComponent,
+    ExchangeHistoryTableComponent
   ],
-  imports: [
-    RouterModule.forChild(routes),
-    CommonModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatTableModule,
-    MatAutocompleteModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    HttpClientModule
-  ]
+    exports: [
+        CurrencyConverterInputComponent,
+        CurrencyConverterResultComponent,
+        ExchangeHistoryComponent,
+        RouterModule,
+        ExchangeHistoryChartComponent
+    ],
+    imports: [
+        RouterModule.forChild(routes),
+        CommonModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatTableModule,
+        MatAutocompleteModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        MatRadioModule,
+        FormsModule
+    ]
 })
 export class CurrencyConverterModule {
 }

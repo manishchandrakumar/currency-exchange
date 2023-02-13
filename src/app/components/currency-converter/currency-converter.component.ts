@@ -47,7 +47,7 @@ export class CurrencyConverterComponent implements OnInit {
   }
 
   private saveConversionHistory(conversionHistory: ConversionHistory): void {
-    const conversionHistoryData = this.storageService.getStorage(ExchangeConstants.HisoryStorageKey) as ConversionHistory[];
+    const conversionHistoryData = this.storageService.getStorage(ExchangeConstants.HistoryStorageKey) as ConversionHistory[];
     let history = [conversionHistory];
 
     if (conversionHistoryData?.length) {
@@ -55,13 +55,13 @@ export class CurrencyConverterComponent implements OnInit {
       history = conversionHistoryData;
     }
 
-    this.storageService.setStorage(ExchangeConstants.HisoryStorageKey, history);
+    this.storageService.setStorage(ExchangeConstants.HistoryStorageKey, history);
   }
 
   private getConversionHistory(conversionInput: ConversionInputInterface): ConversionHistory {
     const uniqueId = new Date().valueOf();
-    const currentDate = moment().format(ExchangeConstants.HisotyDateFormat);
-    const currentTime = moment().format(ExchangeConstants.HisotyTimeFormat);
+    const currentDate = moment().format(ExchangeConstants.HistoryDateFormat);
+    const currentTime = moment().format(ExchangeConstants.HistoryTimeFormat);
 
     return {
       id: uniqueId,

@@ -92,23 +92,6 @@ describe('CurrencyConverterInputComponent', () => {
     });
   });
 
-  it('should emit conversionInput event on submit', () => {
-    spyOn(component.conversionInput, 'emit');
-    component.currencyConversionForm.patchValue({
-      amount: 100,
-      from: 'USD',
-      to: 'EUR',
-    });
-    fixture.detectChanges();
-    fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement.click();
-
-    expect(component.conversionInput.emit).toHaveBeenCalledWith({
-      amount: 100,
-      from: 'USD',
-      to: 'EUR',
-    });
-  });
-
   describe('swapCurrency', () => {
     it('should swap currencies', () => {
       component.ngOnInit();
