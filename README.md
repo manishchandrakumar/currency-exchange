@@ -1,27 +1,35 @@
-# CurrencyConverter
+# Currency Exchange Angular Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.7.
+A simple and user-friendly currency exchange application built with Angular.
 
-## Development server
+## Demo
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+You can check a demo of the application [here](https://currency-exchange-4b5d8.web.app/).
 
-## Code scaffolding
+## Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Convert between different currencies in real-time
+- Historical exchange rate chart
+- User-friendly interface
 
-## Build
+## Technology Stack
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Angular
+- Angular Material
+- Bootstrap
+- AnyChart.js
+- ExchangeRate.host
 
-## Running unit tests
+## Installation
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. Clone the repository: `https://github.com/manishchandrakumar/currency-exchange.git`
+2. Navigate to the project directory: `cd currency-exchange`
+3. Install dependencies: `npm install`
+4. Start the development server: `ng serve`
+5. Open your browser and navigate to `http://localhost:4200/`
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+## License
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+This project is licensed under the GNU GENERAL PUBLIC LICENSE.
